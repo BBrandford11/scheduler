@@ -12,7 +12,7 @@ function InterviewListItem(props) {
 
 
   return (
-    <li className={interviewClass} onClick={props.onChange} selected={props.selected}>
+    <li className={interviewClass} onClick={props.setInterviewer} selected={props.selected}>
       <img
         className="interviewers__item-image"
         src={props.avatar}
