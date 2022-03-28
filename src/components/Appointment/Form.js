@@ -2,9 +2,11 @@ import React, { useState } from "react";
 import Button from "components/Button";
 import InterviewerList from "components/InterviewerList";
 
+
 function Form(props) {
   const [student, setStudent] = useState(props.student || "");
   const [interviewer, setInterviewer] = useState(props.interviewer || null);
+
 
   const cancel = () => {
     reset();
@@ -15,6 +17,8 @@ function Form(props) {
     setStudent("");
     setInterviewer(null)
   };
+
+  
 
   return (
     <main className="appointment__card appointment__card--create">
