@@ -10,6 +10,7 @@ import useVisualMode from "components/hooks/useVisualMode";
 const EMPTY = "EMPTY";
 const SHOW = "SHOW";
 const CREATE = "CREATE";
+const DELETING = 'DELETING';
 const SAVING = "SAVING";
 export default function Appointment(props) {
 
@@ -29,8 +30,10 @@ export default function Appointment(props) {
   }
 
   function cancle(id) {
-    props.cancleInterview(props.id )
-  };
+    transition(DELETING)
+    props.cancleInterview(props.id ).then(()=>{
+      transition(EMPTY)
+    })};
 
   return (
     <Fragment>
@@ -51,6 +54,7 @@ export default function Appointment(props) {
             onSave={save}
           />
         )}
+        {mode === DELETING && <Status message={'Deleting'}/>}
         {mode === SAVING && <Status/>}
       </article>
     </Fragment>
