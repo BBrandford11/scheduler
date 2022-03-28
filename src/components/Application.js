@@ -20,42 +20,23 @@ export default function Application(props) {
   });
   const setDay = (day) => setState({ ...state, day });
 
-  function bookInterview(id, interview) {
-    const appointment = {
-      ...state.appointments[id],
-      interview: { ...interview }
-    };
-
-    const appointments = {
-      ...state.appointments,
-      [id]: appointment
-    };
-    setState({
-      ...state,
-      appointments
-    })
-    
-    console.log(id, interview);
-  }
   
-  
-
   const appointments = getAppointmentsForDay(state, state.day);
   const interviewers = getInterviewersForDay(state, state.day);
   const schedule = appointments.map((appointment) => {
     const interview = getInterview(state, appointment.interview);
     return (
       <Appointment
-        key={appointment.id}
+      key={appointment.id}
         {...appointment}
         interview={interview}
         interviewers={interviewers}
-        bookInterview= {bookInterview}
-        
-      />
-    );
+        bookInterview={bookInterview}
+        cancleInterview= {cancleInterview}
+        />
+        );
   });
-
+  
   useEffect(() => {
     Promise.all([
       axios.get(`http://localhost:8001/api/days`),
@@ -70,6 +51,29 @@ export default function Application(props) {
       }));
     });
   }, []);
+  
+  function bookInterview(id, interview) {
+    const appointment = {
+      ...state.appointments[id],
+      interview: { ...interview },
+    };
+
+    const appointments = {
+      ...state.appointments,
+      [id]: appointment,
+    };
+    return axios.put(`/api/appointments/${id}`, {...appointment}).then(() => {
+      console.log(id, interview);
+      setState({
+        ...state,
+        appointments,
+      });
+    });
+  }
+
+  function cancleInterview (id) {
+    console.log(id )
+  }
 
   return (
     <main className="layout">

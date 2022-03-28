@@ -18,7 +18,9 @@ function Form(props) {
     setInterviewer(null)
   };
 
-  
+  // const interview = props.onSave(student,interviewer)
+  // props.bookInterview(interview)
+
 
   return (
     <main className="appointment__card appointment__card--create">
