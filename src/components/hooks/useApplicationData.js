@@ -1,6 +1,7 @@
+import axios from "axios";
+import { useState, useEffect } from "react";
+
 function useApplicationData() {
-
-
   const [state, setState] = useState({
     day: "Monday",
     days: [],
@@ -8,22 +9,6 @@ function useApplicationData() {
     interviewers: {},
   });
   const setDay = (day) => setState({ ...state, day });
-
-  const appointments = getAppointmentsForDay(state, state.day);
-  const interviewers = getInterviewersForDay(state, state.day);
-  const schedule = appointments.map((appointment) => {
-    const interview = getInterview(state, appointment.interview);
-    return (
-      <Appointment
-        key={appointment.id}
-        {...appointment}
-        interview={interview}
-        interviewers={interviewers}
-        bookInterview={bookInterview}
-        cancleInterview={cancleInterview}
-      />
-    );
-  });
 
   useEffect(() => {
     Promise.all([
@@ -75,7 +60,7 @@ function useApplicationData() {
     });
   }
 
-  return (  );
+  return { state, useEffect, cancleInterview, bookInterview, setDay };
 }
 
 export default useApplicationData;
