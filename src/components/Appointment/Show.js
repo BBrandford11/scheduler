@@ -22,6 +22,7 @@ function Show(props) {
             className="appointment__actions-button"
             src="images/trash.png"
             alt="Delete"
+            //onClick={props.confirmDelete}
             onClick={() => props.onCancel(props.id)}
           />
         </section>
