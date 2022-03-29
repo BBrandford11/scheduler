@@ -6,7 +6,9 @@ import Empty from "./Empty";
 import Status from "./Status";
 import Form from "./Form";
 import Confirm from "./Confirm";
+import Error from "./Error";
 import useVisualMode from "components/hooks/useVisualMode";
+import { transformSync } from "@babel/core";
 
 const EMPTY = "EMPTY";
 const SHOW = "SHOW";
@@ -15,6 +17,9 @@ const DELETING = "DELETING";
 const SAVING = "SAVING";
 const CONFIRM = "CONFIRM";
 const EDIT = "EDIT";
+const ERROR_SAVE = "ERROR _ SAVE";
+const ERROR_DELETE = "ERROR _ DELETE";
+
 export default function Appointment(props) {
   const { mode, transition, back } = useVisualMode(
     props.interview ? SHOW : EMPTY
@@ -26,16 +31,27 @@ export default function Appointment(props) {
       interviewer,
     };
     transition(SAVING);
-    props.bookInterview(props.id, interview).then(() => {
-      transition(SHOW);
-    });
+    props
+      .bookInterview(props.id, interview)
+      .then(() => {
+        transition(SHOW);
+      })
+      .catch(() => {
+        transition(ERROR_SAVE, true);
+      });
   }
 
   function confirmDelete() {
     transition(DELETING);
-    props.cancleInterview(props.id).then(() => {
-      transition(EMPTY);
-    });
+    props
+      .cancleInterview(props.id)
+      .then(() => {
+        transition(EMPTY);
+      })
+      .catch((error) => {
+        //console.log("this is the error", error)
+        transition(ERROR_DELETE, true);
+      });
   }
 
   function cancel(id) {
@@ -43,7 +59,7 @@ export default function Appointment(props) {
   }
 
   function editInterview(id) {
-    transition(EDIT);
+    transition(EDIT, true);
   }
 
   return (
@@ -81,6 +97,13 @@ export default function Appointment(props) {
             interviewers={props.interviewers}
             onCancel={() => back()}
             onSave={save}
+          />
+        )}
+        {mode === ERROR_DELETE && (
+          <Error
+            message={"Could not cancel appointment."}
+            onClose={() => back()}
+            
           />
         )}
         {mode === DELETING && <Status message={"Deleting"} />}
