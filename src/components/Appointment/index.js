@@ -11,11 +11,10 @@ import useVisualMode from "components/hooks/useVisualMode";
 const EMPTY = "EMPTY";
 const SHOW = "SHOW";
 const CREATE = "CREATE";
-const DELETING = 'DELETING';
+const DELETING = "DELETING";
 const SAVING = "SAVING";
-const CONFIRM= "CONFIRM"
+const CONFIRM = "CONFIRM";
 export default function Appointment(props) {
-
   const { mode, transition, back } = useVisualMode(
     props.interview ? SHOW : EMPTY
   );
@@ -32,17 +31,15 @@ export default function Appointment(props) {
   }
 
   function confirmDelete() {
-    transition(DELETING)
-    props.cancleInterview(props.id ).then(()=>{
-      transition(EMPTY)
-   })
-    
+    transition(DELETING);
+    props.cancleInterview(props.id).then(() => {
+      transition(EMPTY);
+    });
   }
-  
+
   function cancel(id) {
-    transition(CONFIRM)
-    
-  };
+    transition(CONFIRM);
+  }
 
   return (
     <Fragment>
@@ -57,9 +54,8 @@ export default function Appointment(props) {
             onDelete={confirmDelete}
           />
         )}
-         {mode === CONFIRM && (
+        {mode === CONFIRM && (
           <Confirm
-          
             onCancel={() => back()}
             message="Are you sure you want to delete this interview session?"
             onConfirm={() => confirmDelete(props.id)}
@@ -72,8 +68,8 @@ export default function Appointment(props) {
             onSave={save}
           />
         )}
-        {mode === DELETING && <Status message={'Deleting'}/>}
-        {mode === SAVING && <Status/>}
+        {mode === DELETING && <Status message={"Deleting"} />}
+        {mode === SAVING && <Status />}
       </article>
     </Fragment>
   );
