@@ -47,7 +47,7 @@ function Form(props) {
           <Button danger onClick={cancel}>
             Cancel
           </Button>
-          <Button confirm onClick={() => props.onSave(student, interviewer)}>Save</Button>
+          <Button confirm onClick={() => props.onSave(student, interviewer,props.status)}>Save</Button>
           
         </section>
       </section>

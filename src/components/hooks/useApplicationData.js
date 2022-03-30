@@ -25,7 +25,32 @@ function useApplicationData() {
     });
   }, []);
 
-  function bookInterview(id, interview) {
+  function removeSpots(state, status = false) {
+    const eachDays = Object.values(state.days);
+  
+    console.log("EACH-DAY:", eachDays);
+    const dayArr = eachDays.map((day) => {
+      if (day.name === state.day && status === false) {
+        day.spots -= 1;
+      }
+    });
+  
+    return dayArr;
+  }
+
+  const addSpots = (state) => {
+    const eachDays = Object.values(state.days)    
+     const dayArr = eachDays.map((day) => {     
+       if (day.name === state.day) {        
+        day.spots += 1;          
+       }
+      });
+    return dayArr
+  } 
+
+ 
+
+  function bookInterview(id, interview,status) {
     const appointment = {
       ...state.appointments[id],
       interview: { ...interview },
@@ -37,10 +62,9 @@ function useApplicationData() {
     };
     return axios.put(`/api/appointments/${id}`, { ...appointment }).then(() => {
       console.log(id, interview);
-      setState({
-        ...state,
-        appointments,
-      });
+      const daysarr = removeSpots(state,status)
+      setState({...state, appointments, daysarr});
+      
     });
   }
 
@@ -56,9 +80,13 @@ function useApplicationData() {
     };
 
     return axios.delete(`/api/appointments/${id}`).then(() => {
-      setState({ ...state, appointments });
+      const dayarr = addSpots(state)
+      setState({ ...state,dayarr, appointments });
     });
   }
+
+ 
+  
 
   return { state, useEffect, cancleInterview, bookInterview, setDay };
 }
