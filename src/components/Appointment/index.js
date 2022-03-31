@@ -41,12 +41,7 @@ export default function Appointment(props) {
       });
   }
 
-  // function delInterview(id, interview){
-  //   transition(DELETING);
-  //   props
-  //     .cancelInterview(props.id, interview)
-  //     .then(() => { });
-  // }
+  
 
   function confirmDelete() {
     transition(DELETING, true);
