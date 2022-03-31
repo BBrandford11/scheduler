@@ -6,19 +6,15 @@ import {
   getInterviewersForDay,
   getInterview,
 } from "helpers/selectors";
-import useApplicationData from "../components/hooks/useApplicationData"
+import useApplicationData from "../components/hooks/useApplicationData";
 
 import DayList from "./DayList";
 
 import "components/Application.scss";
 
 export default function Application(props) {
-  const {
-    state,
-    setDay,
-    bookInterview,
-    cancleInterview
-  } = useApplicationData();
+  const { state, setDay, bookInterview, cancleInterview } =
+    useApplicationData();
 
   const appointments = getAppointmentsForDay(state, state.day);
   const interviewers = getInterviewersForDay(state, state.day);
@@ -35,8 +31,6 @@ export default function Application(props) {
       />
     );
   });
-
-  
 
   return (
     <main className="layout">

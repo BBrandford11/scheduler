@@ -41,8 +41,6 @@ export default function Appointment(props) {
       });
   }
 
-  
-
   function confirmDelete() {
     transition(DELETING, true);
     props
