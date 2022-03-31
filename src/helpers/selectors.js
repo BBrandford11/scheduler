@@ -5,8 +5,10 @@ export function getAppointmentsForDay(state, day) {
     if (days.name === day) {
       days.appointments.filter((appointment) => {
         apps.push(state.appointments[appointment]);
+        return null
       });
     }
+    return null
   });
 
   return apps;
@@ -25,8 +27,10 @@ export function getInterviewersForDay(state, day) {
         if (interviewer.id === state.interviewers.id) {
           interviewersArr.push(state.interviewers[interviewer]);
         }
+        return null
       });
     }
+    return null
   });
   return interviewersArr;
 }

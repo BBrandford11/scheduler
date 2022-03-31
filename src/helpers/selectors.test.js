@@ -56,19 +56,6 @@ test("getAppointmentsForDay returns an empty array when the day is not found", (
   expect(result.length).toEqual(0);
 });
 
-let interviewers = {
-  1: {
-    id: 1,
-    name: "Sylvia Palmer",
-    avatar: "https://i.imgur.com/LpaY82x.png",
-  },
-  2: {
-    id: 2,
-    name: "Tori Malcolm",
-    avatar: "https://i.imgur.com/Nmx0Qxo.png",
-  },
-};
-
 test("getInterview returns null if no interview is booked", () => {
   const result = getInterview(state, state.appointments["2"].interview);
   expect(result).toBeNull();

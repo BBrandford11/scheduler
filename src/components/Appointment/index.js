@@ -49,17 +49,12 @@ export default function Appointment(props) {
         transition(EMPTY);
       })
       .catch((error) => {
-        //console.log("this is the error", error)
         transition(ERROR_DELETE, true);
       });
   }
 
   function cancel(id) {
     transition(CONFIRM);
-  }
-
-  function editInterview(id) {
-    transition(EDIT, true);
   }
 
   return (
@@ -73,13 +68,13 @@ export default function Appointment(props) {
             interviewer={props.interview.interviewer}
             onCancel={cancel}
             onDelete={confirmDelete}
-            onEdit={editInterview}
+            onEdit={() => transition(EDIT)}
           />
         )}
         {mode === EDIT && (
           <Form
             interviewers={props.interviewers}
-            onCancel={back}
+            onCancel={() => back()}
             onSave={save}
             student={props.interview.student}
             interviewer={props.interview.interviewer.id}
@@ -96,7 +91,7 @@ export default function Appointment(props) {
         {mode === CREATE && (
           <Form
             interviewers={props.interviewers}
-            onCancel={() => back()}
+            onCancel={back}
             onSave={save}
           />
         )}

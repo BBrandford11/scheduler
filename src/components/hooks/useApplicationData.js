@@ -28,11 +28,11 @@ function useApplicationData() {
   function removeSpots(state, status = false) {
     const eachDays = Object.values(state.days);
 
-    console.log("EACH-DAY:", eachDays);
     const dayArr = eachDays.map((day) => {
       if (day.name === state.day && status === false) {
         day.spots -= 1;
       }
+      return null;
     });
 
     return dayArr;
@@ -44,6 +44,7 @@ function useApplicationData() {
       if (day.name === state.day) {
         day.spots += 1;
       }
+      return null;
     });
     return dayArr;
   };
@@ -59,7 +60,6 @@ function useApplicationData() {
       [id]: appointment,
     };
     return axios.put(`/api/appointments/${id}`, { ...appointment }).then(() => {
-      console.log(id, interview);
       const daysarr = removeSpots(state, status);
       setState({ ...state, appointments, daysarr });
     });
