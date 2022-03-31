@@ -8,8 +8,11 @@ function useApplicationData() {
     appointments: {},
     interviewers: {},
   });
+
+   // sets the current day state
   const setDay = (day) => setState({ ...state, day });
 
+   // fetches data from scheduler-api with axios and updates setState
   useEffect(() => {
     Promise.all([
       axios.get(`/api/days`),
@@ -25,6 +28,7 @@ function useApplicationData() {
     });
   }, []);
 
+   // remove an interview spot
   function removeSpots(state, status = false) {
     const eachDays = Object.values(state.days);
 
@@ -49,6 +53,7 @@ function useApplicationData() {
     return dayArr;
   };
 
+  // adds an interview appointment to the database with axios
   function bookInterview(id, interview, status) {
     const appointment = {
       ...state.appointments[id],
@@ -65,6 +70,7 @@ function useApplicationData() {
     });
   }
 
+    // removes an interview appointment from database with axios
   function cancleInterview(id) {
     const appointment = {
       ...state.appointments[id],
