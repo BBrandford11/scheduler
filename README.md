@@ -4,6 +4,9 @@
 
 This is our third large scale projects form my schooling at Lighthouse Labs. This is a usefull scheduler application designed to help organize the day by allowing a student to book a one hour time slot with there favorite mentor. This project helped teach us about front end development using React and quering our built database using ajax and webpack.   
 
+## Authors
+- [Bryce Brandford](https://github.com/BBrandford11)
+
 
 ## Setup
 1. Clone this repository onto your local device.
@@ -11,6 +14,11 @@ This is our third large scale projects form my schooling at Lighthouse Labs. Thi
 3. Start the webpack server using the `npm start` command. 
 4. Start the webpack client server using the `npm start` command. The app will be served at <http://localhost:8000/>.
 5. Visit <http://localhost:8000/> to view the app.
+
+
+## Screenshots
+!["screenshot of creating a appointment."](https://github.com/BBrandford11/scheduler/blob/master/Img/overall%201.png)
+!["screenshot of deleting a appointment"](https://github.com/BBrandford11/scheduler/blob/master/Img/delete.png)
 
 
 ## Running Webpack Development Server
